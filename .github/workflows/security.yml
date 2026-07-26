@@ -26,3 +26,23 @@ jobs:
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - run: semgrep scan --config p/owasp-top-ten --error
+
+  sca:
+    name: 3. Dependency Scan (npm audit + Trivy)
+    runs-on: ubuntu-latest
+    needs: [secret-scan]
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm audit --audit-level=high
+        continue-on-error: true
+      - uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          ignore-unfixed: true
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'

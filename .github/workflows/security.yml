@@ -33,13 +33,13 @@ jobs:
     needs: [secret-scan]
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
-      - uses: actions/setup-node@<hash-you-got> # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
       - run: npm install
       - run: npm audit --audit-level=high
         continue-on-error: true
-      - uses: aquasecurity/trivy-action@<hash-you-got> # v0.28.0 (or whatever version you saw)
+      - uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'

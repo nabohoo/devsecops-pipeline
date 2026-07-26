@@ -17,7 +17,8 @@ jobs:
       - uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- sast:
+
+  sast:
     name: 2. SAST Scan (Semgrep)
     runs-on: ubuntu-latest
     container:

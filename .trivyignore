@@ -1,0 +1,9 @@
+# Accepted risk, 2026-07-26: these CVEs are inside npm's own bundled
+# internal tooling (not our app's dependencies — those scan clean).
+# No patched node:24-slim image is available yet. Re-check on next
+# scheduled review.
+CVE-2026-13149
+CVE-2026-14257
+CVE-2026-59873
+CVE-2026-59874
+CVE-2026-12151

@@ -60,3 +60,13 @@ jobs:
           ignore-unfixed: true
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
+
+  deploy:
+    name: 5. Deploy (gated on all scans passing)
+    runs-on: ubuntu-latest
+    needs: [secret-scan, sast, sca, container-scan]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - run: |
+          echo "All security gates passed."
+          echo "Add your real deployment step here once you have a target (AWS, Vercel, Render, etc.)."
